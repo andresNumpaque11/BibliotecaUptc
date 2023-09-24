@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class AVLTree {
 
     private TreeNode root;
@@ -148,26 +150,95 @@ public class AVLTree {
 
         return root;
     }
-    public Book searchByName(TreeNode node, String tittle) {
-    if (node == null) {
-        return null; // El árbol está vacío o el nombre no se encontró
+
+    private void deleteAllByName(TreeNode node, String title) {
+        if (node == null) {
+            return;
+        }
+    
+        // Llama al método en ambos subárboles para continuar la búsqueda y eliminación
+        deleteAllByName(node.getLeft(), title);
+        deleteAllByName(node.getRight(), title);
+    
+        Book book = node.getData();
+    
+        if (book.getTitle().equals(title)) {
+            // Elimina el libro actual si coincide con el título
+            root = deleteRecursive(root, book.getCodeISBN());
+        }
+    }
+    
+    public void deleteAllByName(String title) {
+        deleteAllByName(root, title);
+    }
+    
+
+    private void deleteByCode(TreeNode node, String code) {
+        if (node == null) {
+            return;
+        }
+    
+        Book book = node.getData();
+    
+        if (book.getCodeISBN().equals(code)) {
+            root = deleteRecursive(root, code);
+        }
+    
+        // Llama al método en ambos subárboles para continuar la búsqueda y eliminación
+        deleteByCode(node.getLeft(), code);
+        deleteByCode(node.getRight(), code);
+    }
+    
+    public void deleteByCode(String code) {
+        deleteByCode(root, code);
     }
 
-    Book book = node.getData();
 
-    if (book.getTitle().equals(tittle)) {
-        return book; 
-    } else if (tittle.compareTo(book.getTitle()) < 0) {
-        return searchByName(node.getLeft(), tittle);
-    } else {
-        return searchByName(node.getRight(), tittle);
+    public ArrayList<Book> searchByName(TreeNode node, String title, ArrayList<Book> resultList) {
+        if (node == null) {
+            return resultList; // Retorna la lista de resultados (puede estar vacía)
+        }
+    
+        Book book = node.getData();
+    
+        if (book.getTitle().equals(title)) {
+            resultList.add(book); // Agrega el libro a la lista de resultados
+        }
+    
+        // Realiza la búsqueda en ambos subárboles y almacena los resultados en la lista
+        searchByName(node.getLeft(), title, resultList);
+        searchByName(node.getRight(), title, resultList);
+    
+        return resultList; // Retorna la lista de resultados
     }
-}
 
-public Book searchByName(String name) {
-    return searchByName(root, name);
-}
+    public ArrayList<Book> searchByName(String title) {
+        ArrayList<Book> resultList = new ArrayList<>();
+        return searchByName(root, title, resultList);
+    }
 
+    public ArrayList<Book> searchByCode(TreeNode node, String code, ArrayList<Book> resultList) {
+        if (node == null) {
+            return resultList; // Retorna la lista de resultados (puede estar vacía)
+        }
+    
+        Book book = node.getData();
+    
+        if (book.getCodeISBN().equals(code)) {
+            resultList.add(book); // Agrega el libro a la lista de resultados
+        }
+    
+        // Realiza la búsqueda en ambos subárboles y almacena los resultados en la lista
+        searchByCode(node.getLeft(), code, resultList);
+        searchByCode(node.getRight(), code, resultList);
+    
+        return resultList; // Retorna la lista de resultados
+    }
+    
+    public ArrayList<Book> searchByCode(String code) {
+        ArrayList<Book> resultList = new ArrayList<>();
+        return searchByCode(root, code, resultList);
+    }
 
     private TreeNode minValueNode(TreeNode node) {
         TreeNode current = node;
@@ -180,5 +251,5 @@ public Book searchByName(String name) {
     public TreeNode getRoot() {
         return root;
     }
-    
+
 }

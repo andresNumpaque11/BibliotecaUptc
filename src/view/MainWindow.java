@@ -17,8 +17,8 @@ public class MainWindow extends JFrame {
     private PanelDelete panelDelete;
     private Results results;
 
-    public MainWindow(ActionListener listener, AVLTree tree) {
-        initComponents(listener, tree);
+    public MainWindow(ActionListener listener) {
+        initComponents(listener);
         this.setTitle("Biblioteca Uptc");
         this.setSize(1360, 720);
         this.setVisible(true);
@@ -26,7 +26,7 @@ public class MainWindow extends JFrame {
 
     }
     
-    private void initComponents(ActionListener listener,AVLTree tree){
+    private void initComponents(ActionListener listener){
         this.setLayout(null);
         panelHeader = new PanelHeader(listener);
         panelHeader.setBounds(0, 0, 1360, 100);
@@ -43,7 +43,7 @@ public class MainWindow extends JFrame {
         panelImage = new panelImage();
         panelImage.setBounds(680, 101, 680, 600);
         add(panelImage);
-        results = new Results(tree);
+        results = new Results();
         
     }
 

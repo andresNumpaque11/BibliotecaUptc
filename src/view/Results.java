@@ -6,6 +6,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
@@ -25,22 +27,17 @@ public class Results extends JDialog {
     private JTable table;
     private DefaultTableModel tableModel;
     private JButton btnClose;
-    private AVLTree tree;
 
-    public Results(AVLTree trees) {
-        this.tree = trees;
+    public Results() {
         initComponents();
         this.setTitle("Tabla de Libros");
         this.setVisible(false);
         this.setSize(800, 400);
         createTable();
-        fillTable(tree.getRoot());
     }
 
     private void initComponents() {
-        tree = new AVLTree();
         setLayout(new BorderLayout());
-        String columns[] = {"Titulo", "codigo", "Autor"};
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
         table.setFillsViewportHeight(true);
@@ -63,13 +60,13 @@ public class Results extends JDialog {
             Book book = node.getData();
             Author author = book.getAutor();
             Object[] row = {
-                book.getTitle(),
-                book.getCodeISBN(),
-                author.getName(),
-                author.getLastName(),
+                    book.getTitle(),
+                    book.getCodeISBN(),
+                    author.getName(),
+                    author.getLastName(),
             };
             tableModel.addRow(row);
-            fillTable(node.getRight()); 
+            fillTable(node.getRight());
         }
     }
 
@@ -77,4 +74,22 @@ public class Results extends JDialog {
         this.setVisible(b);
     }
 
+    public void refreshTable(AVLTree tree) {
+        tableModel.setRowCount(0);
+        fillTable(tree.getRoot());
+    }
+
+    public void showOnly(ArrayList<Book> books) {
+        tableModel.setRowCount(0);
+        for (Book book : books) {
+            Author author = book.getAutor();
+            Object[] row = {
+                    book.getTitle(),
+                    book.getCodeISBN(),
+                    author.getName(),
+                    author.getLastName(),
+            };
+            tableModel.addRow(row);
+        }
+    }
 }
