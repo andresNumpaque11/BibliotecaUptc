@@ -2,6 +2,7 @@ package view;
 
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import model.AVLTree;
 
 /**
  *
@@ -14,9 +15,10 @@ public class MainWindow extends JFrame {
     private panelImage panelImage;
     private PanelSearch panelSearch;
     private PanelDelete panelDelete;
+    private Results results;
 
-    public MainWindow(ActionListener listener) {
-        initComponents(listener);
+    public MainWindow(ActionListener listener, AVLTree tree) {
+        initComponents(listener, tree);
         this.setTitle("Biblioteca Uptc");
         this.setSize(1360, 720);
         this.setVisible(true);
@@ -24,7 +26,7 @@ public class MainWindow extends JFrame {
 
     }
     
-    private void initComponents(ActionListener listener){
+    private void initComponents(ActionListener listener,AVLTree tree){
         this.setLayout(null);
         panelHeader = new PanelHeader(listener);
         panelHeader.setBounds(0, 0, 1360, 100);
@@ -41,6 +43,7 @@ public class MainWindow extends JFrame {
         panelImage = new panelImage();
         panelImage.setBounds(680, 101, 680, 600);
         add(panelImage);
+        results = new Results(tree);
         
     }
 
@@ -64,6 +67,10 @@ public class MainWindow extends JFrame {
     }
     public void openCloseDelete(boolean  b){
         panelDelete.setVisible(b);
+    }
+
+    public Results getResults() {
+        return results;
     }
     
 

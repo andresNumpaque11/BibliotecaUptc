@@ -11,7 +11,7 @@ import javax.swing.JTextField;
  */
 public class PanelHeader extends PanelFather {
     
-    private JButton btnAdd, btnDelete,  btnSearch;
+    private JButton btnAdd, btnDelete,  btnSearch,btnView;
     private JTextField txtSearch;
 
     public PanelHeader(ActionListener listener) {
@@ -33,7 +33,10 @@ public class PanelHeader extends PanelFather {
         btnDelete.addActionListener(listener);
         btnDelete.setActionCommand("delete");
         createButton("src/resources/btnDelete.png", btnDelete, 500, 20, 200, 50);
-        
+        btnView = new JButton();
+        btnView.addActionListener(listener);
+        btnView.setActionCommand("viewAll");
+        createButton("src/resources/btnView.png", btnView, 750, 20, 200, 50);
     }
   
     

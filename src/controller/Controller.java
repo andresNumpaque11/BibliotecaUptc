@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.AVLTree;
 import model.Author;
@@ -18,8 +19,8 @@ public class Controller implements ActionListener {
     private AVLTree tree;
 
     public Controller() {
-        mw = new MainWindow(this);
         tree = new AVLTree();
+        mw = new MainWindow(this,tree);
     }
 
     private void add() {
@@ -54,16 +55,6 @@ public class Controller implements ActionListener {
             tree.searchByName(name);
         }
     }
-     private Object[][] getDatas() {
-        ArrayList<Book> list = sl.getPlayers();
-        Object[][] datas = new Object[list.size()][3];
-        for (int i = 0; i < list.size(); i++) {
-            datas[i][0] = list.get(i).getNickName();
-            datas[i][1] = list.get(i).getScore();
-            datas[i][2] = list.get(i).getRecordScore();
-        }
-        return datas;
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -89,6 +80,8 @@ public class Controller implements ActionListener {
                 break;
             case "cancel":
                 mw.openCloseDatas(false);
+            case "viewAll":
+                mw.getResults().openCloseWindow(true);
         }
     }
 

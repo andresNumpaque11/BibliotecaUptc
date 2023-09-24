@@ -1,6 +1,7 @@
 package model;
 
 public class TreeNode {
+
     private Book data;
     private TreeNode left;
     private TreeNode right;
@@ -10,7 +11,7 @@ public class TreeNode {
         this.data = data;
         this.left = null;
         this.right = null;
-        this.height = 1; // Inicialmente, la altura del nodo es 1.
+        this.height = 1; // 
     }
 
     public Book getData() {

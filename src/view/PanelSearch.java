@@ -36,6 +36,11 @@ public class PanelSearch  extends PanelFather{
         createButton("src/resources/btnSearchCode.png", BtnSearchCode,170, 50, 150, 30);
         add(BtnSearchCode);
     }
+
+    public JTextField getSearch() {
+        return search;
+    }
+    
     
     
     

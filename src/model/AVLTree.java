@@ -176,4 +176,9 @@ public Book searchByName(String name) {
         }
         return current;
     }
+
+    public TreeNode getRoot() {
+        return root;
+    }
+    
 }
