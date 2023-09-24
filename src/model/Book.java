@@ -1,4 +1,4 @@
-
+    
 package model;
 
 /**
@@ -20,7 +20,13 @@ public class Book {
         this.tomo = tomo;
         this.editorial = editorial;
         this.autor = autor;
+        numberBooks = 0;
     }
+
+    public Book() {
+    }
+    
+    
 
     public Author getAutor() {
         return autor;
@@ -41,6 +47,12 @@ public class Book {
     public int getTomo() {
         return tomo;
     }
+
+    public int getNumberBooks() {
+        return numberBooks;
+    }
+    
+    
 
     public void setAutor(Author autor) {
         this.autor = autor;

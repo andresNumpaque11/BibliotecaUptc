@@ -12,6 +12,8 @@ public class MainWindow extends JFrame {
     private PanelHeader panelHeader;
     private PanelDatas panelDatas;
     private panelImage panelImage;
+    private PanelSearch panelSearch;
+    private PanelDelete panelDelete;
 
     public MainWindow(ActionListener listener) {
         initComponents(listener);
@@ -30,6 +32,12 @@ public class MainWindow extends JFrame {
         panelDatas = new PanelDatas(listener);
         panelDatas.setBounds(0, 101, 680, 600);
         add(panelDatas);
+         panelSearch = new PanelSearch(listener);
+        panelSearch.setBounds(0, 101, 680, 600);
+        add(panelSearch);
+        panelDelete = new PanelDelete(listener);
+        panelDelete.setBounds(0, 101, 680, 600);
+        add(panelDelete);
         panelImage = new panelImage();
         panelImage.setBounds(680, 101, 680, 600);
         add(panelImage);
@@ -39,8 +47,23 @@ public class MainWindow extends JFrame {
     public PanelDatas getPanelDatas() {
         return panelDatas;
     }
+
+    public PanelSearch getPanelSearch() {
+        return panelSearch;
+    }
+
+    public PanelDelete getPanelDelete() {
+        return panelDelete;
+    }
+    
     public void openCloseDatas(boolean  b){
         panelDatas.setVisible(b);
+    }
+    public void openCloseSearch(boolean  b){
+        panelSearch.setVisible(b);
+    }
+    public void openCloseDelete(boolean  b){
+        panelDelete.setVisible(b);
     }
     
 

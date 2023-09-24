@@ -2,10 +2,12 @@ package model;
 
 public class AVLTree {
 
-    TreeNode root;
+    private TreeNode root;
+    private Book book;
 
     public AVLTree() {
         root = null;
+        book = new Book();
     }
 
     private int height(TreeNode node) {
@@ -85,7 +87,7 @@ public class AVLTree {
             root.setRight(rightRotate(root.getRight()));
             return leftRotate(root);
         }
-
+        book.setNumberBooks(+1);
         return root;
     }
 
@@ -146,6 +148,26 @@ public class AVLTree {
 
         return root;
     }
+    public Book searchByName(TreeNode node, String tittle) {
+    if (node == null) {
+        return null; // El árbol está vacío o el nombre no se encontró
+    }
+
+    Book book = node.getData();
+
+    if (book.getTitle().equals(tittle)) {
+        return book; 
+    } else if (tittle.compareTo(book.getTitle()) < 0) {
+        return searchByName(node.getLeft(), tittle);
+    } else {
+        return searchByName(node.getRight(), tittle);
+    }
+}
+
+public Book searchByName(String name) {
+    return searchByName(root, name);
+}
+
 
     private TreeNode minValueNode(TreeNode node) {
         TreeNode current = node;
